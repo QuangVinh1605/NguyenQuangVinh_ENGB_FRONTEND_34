@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ducument</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+        select, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+        .product {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Danh sách sản phẩm</h3>
+    <ul id="productList">
+        <li class="product" data-category="Đồ ăn"><b>Tên đồ ăn:</b> Rau sạch - <b>Danh mục:</b> Đồ ăn</li>
+        <li class="product" data-category="Đồ ăn"><b>Tên đồ ăn:</b> Thịt lợn - <b>Danh mục:</b> Đồ ăn</li>
+        <li class="product" data-category="Nước"><b>Tên đồ ăn:</b> Pepsi không calo - <b>Danh mục:</b> Nước</li>
+        <li class="product" data-category="Nước"><b>Tên đồ ăn:</b> Cocacola - <b>Danh mục:</b> Nước</li>
+        <li class="product" data-category="Dụng cụ"><b>Tên đồ ăn:</b> Cờ lê - <b>Danh mục:</b> Dụng cụ</li>
+        <li class="product" data-category="Dụng cụ"><b>Tên đồ ăn:</b> Tua vít - <b>Danh mục:</b> Dụng cụ</li>
+    </ul>
+
+    <h3>Lọc sản phẩm theo danh mục</h3>
+    <select id="categorySelect">
+        <option value="">-- Lựa chọn danh mục --</option>
+        <option value="Đồ ăn">Đồ ăn</option>
+        <option value="Nước">Nước</option>
+        <option value="Dụng cụ">Dụng cụ</option>
+    </select>
+    <button onclick="filterProducts()">Lọc</button>
+
+    <h3>Sản phẩm sau khi lọc</h3>
+    <ul id="filteredList"></ul>
+
+    <script>
+        const allProducts = [
+            { name: "Rau sạch", category: "Đồ ăn" },
+            { name: "Thịt lợn", category: "Đồ ăn" },
+            { name: "Pepsi không calo", category: "Nước" },
+            { name: "CocaCola", category: "Nước" },
+            { name: "Cờ lê", category: "Dụng cụ" },
+            { name: "Tua vít", category: "Dụng cụ" }
+        ];
+
+        function filterProducts() {
+            let category = document.getElementById("categorySelect").value;
+            let productList = document.getElementById("productList");
+            let filteredList = document.getElementById("filteredList");
+            filteredList.innerHTML = "";
+            let filteredProducts = allProducts.filter(product =>
+                category === "" || product.category === category
+            );
+            filteredProducts.forEach(product => {
+                let li = document.createElement("li");
+                li.innerHTML = `<b>Tên đồ ăn:</b> ${product.name} - <b>Danh mục:</b> ${product.category}`
+                filteredList.appendChild(li);
+            });
+        }
+    </script>
+
+</body>
+</html>
